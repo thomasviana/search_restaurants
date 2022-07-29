@@ -20,20 +20,18 @@ class RestaurantRepositoryImpl implements RestaurantRepository {
   final RestaurantCache cache;
   final CachePolicy cachePolicy;
 
-  Future<void> _refresh() async {
-    if (cachePolicy.isExpired) {
-      await apiClient
-          .getRestaurants()
-          .then((value) => mapper.fromJsonArray(value))
-          .then((value) => cache.replaceAllObjects(value))
-          .then((_) => cachePolicy.validate())
-          .catchError((error, _) => cachePolicy.invalidate());
-    }
+  Future<void> _refresh(city) async {
+    await apiClient
+        .getRestaurants(city)
+        .then((value) => mapper.fromJsonArray(value))
+        .then((value) => cache.replaceAllObjects(value))
+        .then((_) => cachePolicy.validate())
+        .catchError((error, _) => cachePolicy.invalidate());
   }
 
   @override
   Future<List<Restaurant>> findByCity(String city) {
-    return _refresh().then((_) => cache.values.first).then(
+    return _refresh(city).then((_) => cache.values.first).then(
           (restaurants) => restaurants
               .where((restaurant) => restaurant.city == city)
               .toList(),
