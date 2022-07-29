@@ -5,6 +5,11 @@ class SearchHistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Container());
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search history'),
+      ),
+      body: Container(),
+    );
   }
 }

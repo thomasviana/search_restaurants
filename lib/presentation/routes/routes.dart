@@ -15,7 +15,7 @@ class AppRouter {
       case AppNavigator.ROUTE_SPLASH_SCREEN:
         return _buildRoute(
           settings,
-          SplashScreen(),
+          const SplashScreen(),
         );
       case AppNavigator.ROUTE_AUTH_SCREEN:
         return _buildRoute(
