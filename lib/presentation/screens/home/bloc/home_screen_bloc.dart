@@ -14,6 +14,7 @@ part 'home_screen_state.dart';
 @injectable
 class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   final GetRestaurantsByCity _getRestaurantsByCity;
+  String _lastQuery = '';
 
   HomeScreenBloc(
     this._getRestaurantsByCity,
@@ -33,7 +34,9 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     RestaurantsRequested event,
     Emitter emit,
   ) async {
-    final result = await _getRestaurantsByCity(state.query);
+    _lastQuery = state.query;
+    print('ss: $_lastQuery');
+    final result = await _getRestaurantsByCity(_lastQuery);
     emit(state.copyWith(
       restaurants: result,
       status: Status.success,

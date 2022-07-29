@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:search_restaurants/di/dependency_injection.dart';
-import 'package:search_restaurants/presentation/screens/home/bloc/home_screen_bloc.dart';
 import 'package:search_restaurants/presentation/screens/home/home_screen.dart';
 import 'package:search_restaurants/presentation/screens/main/main_app_cubit/main_screen_cubit.dart';
 import 'package:search_restaurants/presentation/screens/search_history/search_history_screen.dart';
@@ -26,10 +24,8 @@ class _MainAppScreenState extends State<MainAppScreen> {
   Widget _buildPage(BuildContext context, int selectedPageIndex) {
     switch (selectedPageIndex) {
       case 0:
-        return BlocProvider(
-          create: (context) => sl<HomeScreenBloc>(),
-          child: const HomeScreen(),
-        );
+        return const HomeScreen();
+
       case 1:
         return const SearchHistoryScreen();
       default:

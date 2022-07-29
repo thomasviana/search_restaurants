@@ -19,7 +19,6 @@ class ApiClient {
       'Accept': 'application/json',
       'Authorization': 'Bearer $apiKey',
     }).mapResponse((response) {
-      print(jsonDecode(response.body)['businesses']);
       return jsonDecode(response.body)['businesses'];
     });
   }

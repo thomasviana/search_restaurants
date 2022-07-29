@@ -8,7 +8,7 @@ typedef RestaurantCache = IdentifiableCollectionCache<Restaurant>;
 
 @LazySingleton(as: RestaurantRepository)
 class RestaurantRepositoryImpl implements RestaurantRepository {
-  const RestaurantRepositoryImpl(
+  RestaurantRepositoryImpl(
     this.apiClient,
     this.mapper,
     this.cache,
@@ -20,13 +20,18 @@ class RestaurantRepositoryImpl implements RestaurantRepository {
   final RestaurantCache cache;
   final CachePolicy cachePolicy;
 
+  String _lastCity = '';
+
   Future<void> _refresh(city) async {
-    await apiClient
-        .getRestaurants(city)
-        .then((value) => mapper.fromJsonArray(value))
-        .then((value) => cache.replaceAllObjects(value))
-        .then((_) => cachePolicy.validate())
-        .catchError((error, _) => cachePolicy.invalidate());
+    if (cachePolicy.isExpired || city != _lastCity) {
+      _lastCity = city;
+      await apiClient
+          .getRestaurants(city)
+          .then((value) => mapper.fromJsonArray(value))
+          .then((value) => cache.replaceAllObjects(value))
+          .then((_) => cachePolicy.validate())
+          .catchError((error, _) => cachePolicy.invalidate());
+    }
   }
 
   @override

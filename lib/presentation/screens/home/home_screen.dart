@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    bloc = context.read<HomeScreenBloc>();
+    bloc = context.read<HomeScreenBloc>()..add(RestaurantsRequested());
   }
 
   @override

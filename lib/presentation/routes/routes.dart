@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:search_restaurants/di/dependency_injection.dart';
 import 'package:search_restaurants/presentation/screens/auth/auth_screen.dart';
 import 'package:search_restaurants/presentation/screens/auth/cubit/auth_screen_cubit.dart';
+import 'package:search_restaurants/presentation/screens/home/bloc/home_screen_bloc.dart';
 import 'package:search_restaurants/presentation/screens/main/main_app_cubit/main_screen_cubit.dart';
 import 'package:search_restaurants/presentation/screens/main/main_app_screen.dart';
 import 'package:search_restaurants/presentation/screens/splash/splash_screen.dart';
@@ -32,6 +33,9 @@ class AppRouter {
             providers: [
               BlocProvider(
                 create: (context) => sl<MainScreenCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => sl<HomeScreenBloc>(),
               ),
             ],
             child: const MainAppScreen(),
