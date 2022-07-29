@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "140672872644",
+    "project_id": "search-restaurants-flutter",
+    "storage_bucket": "search-restaurants-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140672872644:android:e4efd10b087872d950d991",
+        "android_client_info": {
+          "package_name": "com.example.search_restaurants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140672872644-et2l76psk06t2usd257blgcs4ebbdvcg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcV-NUs-rhgWWuEeI_aqge5SUe0gdnQuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140672872644-et2l76psk06t2usd257blgcs4ebbdvcg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
