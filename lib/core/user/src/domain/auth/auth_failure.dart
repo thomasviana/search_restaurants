@@ -1,16 +1,16 @@
 class AuthFailure {
-  final bool? isCanceledByUser;
-  final bool? isServerError;
-  final bool? isUserNotFound;
-  final bool? isEmailAlreadyInUse;
-  final bool? isInvalidEmailAndPasswordCombination;
+  final bool isCanceledByUser;
+  final bool isServerError;
+  final bool isUserNotFound;
+  final bool isEmailAlreadyInUse;
+  final bool isInvalidEmailAndPasswordCombination;
 
   AuthFailure({
-    this.isCanceledByUser,
-    this.isServerError,
-    this.isUserNotFound,
-    this.isEmailAlreadyInUse,
-    this.isInvalidEmailAndPasswordCombination,
+    this.isCanceledByUser = false,
+    this.isServerError = false,
+    this.isUserNotFound = false,
+    this.isEmailAlreadyInUse = false,
+    this.isInvalidEmailAndPasswordCombination = false,
   });
 
   factory AuthFailure.cancelledByUser() => AuthFailure(isCanceledByUser: true);
@@ -27,8 +27,19 @@ class AuthFailure {
     required String Function() userNotFound,
     required String Function() emailAlreadyInUser,
     required String Function() invalidEmailAndPasswordCombination,
-  }) =>
-      throw Error;
+  }) {
+    return isCanceledByUser
+        ? cancelledByUser()
+        : isServerError
+            ? serverError()
+            : isUserNotFound
+                ? userNotFound()
+                : isEmailAlreadyInUse
+                    ? emailAlreadyInUser()
+                    : isInvalidEmailAndPasswordCombination
+                        ? invalidEmailAndPasswordCombination()
+                        : '';
+  }
 
   AuthFailure copyWith({
     bool? isCanceledByUser,
